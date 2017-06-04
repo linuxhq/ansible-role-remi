@@ -5,6 +5,7 @@
 [remi]
 name=Remi's RPM repository for Enterprise Linux {{ remi_rel }} - $basearch
 #baseurl=http://rpms.remirepo.net/enterprise/{{ remi_rel }}/remi/$basearch/
+#mirrorlist=https://rpms.remirepo.net/enterprise/{{ remi_rel }}/remi/httpsmirror
 mirrorlist=http://rpms.remirepo.net/enterprise/{{ remi_rel }}/remi/mirror
 enabled={{ '1' if remi_remi is defined and remi_remi else '0' }}
 gpgcheck=1
@@ -13,6 +14,7 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
 [remi-php55]
 name=Remi's PHP 5.5 RPM repository for Enterprise Linux {{ remi_rel }} - $basearch
 #baseurl=http://rpms.remirepo.net/enterprise/{{ remi_rel }}/php55/$basearch/
+#mirrorlist=https://rpms.remirepo.net/enterprise/{{ remi_rel }}/php55/httpsmirror
 mirrorlist=http://rpms.remirepo.net/enterprise/{{ remi_rel }}/php55/mirror
 # NOTICE: common dependencies are in "remi-safe"
 enabled={{ '1' if remi_remi_php55 is defined and remi_remi_php55 else '0' }}
@@ -22,6 +24,7 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
 [remi-php56]
 name=Remi's PHP 5.6 RPM repository for Enterprise Linux {{ remi_rel }} - $basearch
 #baseurl=http://rpms.remirepo.net/enterprise/{{ remi_rel }}/php56/$basearch/
+#mirrorlist=https://rpms.remirepo.net/enterprise/{{ remi_rel }}/php56/httpsmirror
 mirrorlist=http://rpms.remirepo.net/enterprise/{{ remi_rel }}/php56/mirror
 # NOTICE: common dependencies are in "remi-safe"
 enabled={{ '1' if remi_remi_php56 is defined and remi_remi_php56 else '0' }}
@@ -31,6 +34,7 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
 [remi-test]
 name=Remi's test RPM repository for Enterprise Linux {{ remi_rel }} - $basearch
 #baseurl=http://rpms.remirepo.net/enterprise/{{ remi_rel }}/test/$basearch/
+#mirrorlist=https://rpms.remirepo.net/enterprise/{{ remi_rel }}/test/mirror
 mirrorlist=http://rpms.remirepo.net/enterprise/{{ remi_rel }}/test/mirror
 # WARNING: If you enable this repository, you must also enable "remi"
 enabled={{ '1' if remi_remi_test is defined and remi_remi_test else '0' }}
