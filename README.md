@@ -20,6 +20,7 @@ Available variables are listed below, along with default values:
     remi_remi: False
     remi_remi_debuginfo: False
     remi_remi_safe: False
+    remi_remi_safe_debuginfo: False
     remi_remi_test: False
     remi_remi_test_debuginfo: False
     remi_remi_php55: False
