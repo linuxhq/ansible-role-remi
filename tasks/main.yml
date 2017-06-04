@@ -1,49 +1,54 @@
 ---
 - name: Assert that prerequisites exist
-  tags: remi-release
+  tags: remi
   assert:
     that:
       - remi_pkg is defined
       - remi_rel is defined
       - remi_baseurl is defined
 
-- name: Execute mktemp
-  tags: remi-release
+- name: Generate random package name
+  tags: remi
   command: mktemp -u --suffix .rpm
   register: remi_mktemp
 
-- name: Create temporary package
-  tags: remi-release
-  get_url: url={{ remi_fetch }}
-           dest={{ remi_mktemp.stdout }}
+- name: Fetch {{ remi_pkg }} to temporary destination
+  tags: remi
+  get_url:
+    url: "{{ remi_fetch }}"
+    dest: "{{ remi_mktemp.stdout }}"
   register: remi_get_url
   when: remi_mktemp|success
 
-- name: Install remi-release
-  tags: remi-release
-  yum: name={{ item }}
-       state=present
+- name: Ensure that the {{ remi_pkg }} package is installed
+  tags: remi
+  yum:
+    name: "{{ item }}"
+    state: present
   register: remi_yum
   with_items: "{{ remi_mktemp.stdout }}"
   when: remi_get_url|success
 
-- name: Configure repositories
-  tags: remi-release
-  template: src={{ item.src }}
-            dest={{ item.dst }}
-            owner=root
-            group=root
-            mode=0644
+- name: Applying {{ remi_pkg }} configurations
+  tags: remi
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dst }}"
+    owner: root
+    group: root
+    mode: 0644
   with_items:
     - { src: remi.repo.j2, dst: /etc/yum.repos.d/remi.repo }
     - { src: remi-php70.repo.j2, dst: /etc/yum.repos.d/remi-php70.repo }
     - { src: remi-safe.repo.j2, dst: /etc/yum.repos.d/remi-safe.repo }
   when: remi_yum|success
 
-- name: Erase temporary package
-  tags: remi-release
-  file: path={{ remi_mktemp.stdout }}
-        state=absent
+- name: Prune temporary package from the filesystem
+  tags: remi
+  file:
+    path: "{{ remi_mktemp.stdout }}"
+    state: absent
   when:
     - remi_mktemp|success
     - remi_yum|success
+...

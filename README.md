@@ -17,20 +17,19 @@ Available variables are listed below, along with default values:
     remi_baseurl: "http://rpms.famillecollet.com/enterprise"
     remi_release: "{{ remi_pkg }}-{{ remi_rel }}"
     remi_fetch: "{{ remi_baseurl }}/{{ remi_release }}.rpm"
-    remi_repos:
-      remi: False
-      remi_debuginfo: False
-      remi_php55: False
-      remi_php55_debuginfo: False
-      remi_php56: False
-      remi_php56_debuginfo: False
-      remi_php70: False
-      remi_php70_debuginfo: False
-      remi_php70_test: False
-      remi_php70_test_debuginfo: False
-      remi_safe: False
-      remi_test: False
-      remi_test_debuginfo: False
+    remi_remi: False
+    remi_remi_debuginfo: False
+    remi_remi_safe: False
+    remi_remi_test: False
+    remi_remi_test_debuginfo: False
+    remi_remi_php55: False
+    remi_remi_php55_debuginfo: False
+    remi_remi_php56: False
+    remi_remi_php56_debuginfo: False
+    remi_remi_php70: False
+    remi_remi_php70_debuginfo: False
+    remi_remi_php70_test: False
+    remi_remi_php70_test_debuginfo: False
 
 All repositories are disabled by default.
 
@@ -43,8 +42,7 @@ All repositories are disabled by default.
     - hosts: servers
       roles:
         - role: linuxhq.remi
-          remi_repos:
-            remi_safe: True
+          remi_remi: True
 
 ## License
 

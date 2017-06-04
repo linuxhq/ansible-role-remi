@@ -6,14 +6,6 @@
 name=Safe Remi's RPM repository for Enterprise Linux {{ remi_rel }} - $basearch
 #baseurl=http://rpms.remirepo.net/enterprise/{{ remi_rel }}/safe/$basearch/
 mirrorlist=http://rpms.remirepo.net/enterprise/{{ remi_rel }}/safe/mirror
-{% if remi_repos.remi_safe is defined %}
-{%   if remi_repos.remi_safe %}
-enabled=1
-{%   else %}
-enabled=0
-{%   endif %}
-{% else %}
-enabled=0
-{% endif %}
+enabled={{ '1' if remi_remi_safe is defined and remi_remi_safe else '0' }}
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
