@@ -23,14 +23,19 @@ Available variables are listed below, along with default values:
     remi_remi_safe_debuginfo: False
     remi_remi_test: False
     remi_remi_test_debuginfo: False
-    remi_remi_php55: False
-    remi_remi_php55_debuginfo: False
-    remi_remi_php56: False
-    remi_remi_php56_debuginfo: False
+    remi_remi_php54: False
     remi_remi_php70: False
     remi_remi_php70_debuginfo: False
     remi_remi_php70_test: False
     remi_remi_php70_test_debuginfo: False
+    remi_remi_php71: False
+    remi_remi_php71_debuginfo: False
+    remi_remi_php71_test: False
+    remi_remi_php71_test_debuginfo: False
+    remi_remi_php72: False
+    remi_remi_php72_debuginfo: False
+    remi_remi_php72_test: False
+    remi_remi_php72_test_debuginfo: False
 
 ## Dependencies
 
