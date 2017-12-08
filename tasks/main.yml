@@ -1,5 +1,5 @@
 ---
-- name: Assert that prerequisites exist
+- name: Assert that the prerequisites are defined
   tags: remi
   assert:
     that:
@@ -7,12 +7,19 @@
       - remi_rel is defined
       - remi_baseurl is defined
 
-- name: Generate random package name
+- name: Acquiring the Remi GPG key
+  tags: remi
+  become: true
+  rpm_key:
+    key: "https://rpms.remirepo.net/RPM-GPG-KEY-remi"
+    state: present
+
+- name: Generating temporary filename via mktemp
   tags: remi
   command: mktemp -u --suffix .rpm
   register: remi_mktemp
 
-- name: Fetch {{ remi_pkg }} to temporary destination
+- name: Downloading package to temporary location
   tags: remi
   get_url:
     url: "{{ remi_fetch }}"
@@ -20,8 +27,9 @@
   register: remi_get_url
   when: remi_mktemp|success
 
-- name: Ensure that the {{ remi_pkg }} package is installed
+- name: Ensure that the remi-release package is installed
   tags: remi
+  become: true
   yum:
     name: "{{ item }}"
     state: present
@@ -29,8 +37,9 @@
   with_items: "{{ remi_mktemp.stdout }}"
   when: remi_get_url|success
 
-- name: Applying {{ remi_pkg }} configurations
+- name: Applying remi repository configurations
   tags: remi
+  become: true
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dst }}"
@@ -43,7 +52,7 @@
     - { src: remi-safe.repo.j2, dst: /etc/yum.repos.d/remi-safe.repo }
   when: remi_yum|success
 
-- name: Prune temporary package from the filesystem
+- name: Purging temporary package from filesystem
   tags: remi
   file:
     path: "{{ remi_mktemp.stdout }}"
