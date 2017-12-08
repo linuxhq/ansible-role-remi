@@ -7,13 +7,6 @@
       - remi_rel is defined
       - remi_baseurl is defined
 
-- name: Acquiring the Remi GPG key
-  tags: remi
-  become: true
-  rpm_key:
-    key: "https://rpms.remirepo.net/RPM-GPG-KEY-remi"
-    state: present
-
 - name: Generating temporary filename via mktemp
   tags: remi
   command: mktemp -u --suffix .rpm
@@ -48,9 +41,22 @@
     mode: 0644
   with_items:
     - { src: remi.repo.j2, dst: /etc/yum.repos.d/remi.repo }
+    - { src: remi-php54.repo.j2, dst: /etc/yum.repos.d/remi-php54.repo }
     - { src: remi-php70.repo.j2, dst: /etc/yum.repos.d/remi-php70.repo }
+    - { src: remi-php71.repo.j2, dst: /etc/yum.repos.d/remi-php71.repo }
+    - { src: remi-php72.repo.j2, dst: /etc/yum.repos.d/remi-php72.repo }
     - { src: remi-safe.repo.j2, dst: /etc/yum.repos.d/remi-safe.repo }
   when: remi_yum|success
+
+- name: Ensure that the Remi GPG keys are installed
+  tags: remi
+  become: true
+  rpm_key:
+    key: "{{ item }}"
+    state: present
+  with_items:
+    - /etc/pki/rpm-gpg/RPM-GPG-KEY-remi
+    - /etc/pki/rpm-gpg/RPM-GPG-KEY-remi2017
 
 - name: Purging temporary package from filesystem
   tags: remi

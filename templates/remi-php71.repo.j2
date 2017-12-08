@@ -1,0 +1,34 @@
+# This repository only provides PHP 7.1 and its extensions
+# NOTICE: common dependencies are in "remi-safe"
+
+[remi-php71]
+name=Remi's PHP 7.1 RPM repository for Enterprise Linux {{ remi_rel }} - $basearch
+#baseurl=http://rpms.remirepo.net/enterprise/{{ remi_rel }}/php71/$basearch/
+#mirrorlist=https://rpms.remirepo.net/enterprise/{{ remi_rel }}/php71/httpsmirror
+mirrorlist=http://rpms.remirepo.net/enterprise/{{ remi_rel }}/php71/mirror
+enabled={{ '1' if remi_remi_php71 is defined and remi_remi_php71 else '0' }}
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
+
+[remi-php71-debuginfo]
+name=Remi's PHP 7.1 RPM repository for Enterprise Linux {{ remi_rel }} - $basearch - debuginfo
+baseurl=http://rpms.remirepo.net/enterprise/{{ remi_rel }}/debug-php71/$basearch/
+enabled={{ '1' if remi_remi_php71_debuginfo is defined and remi_remi_php71_debuginfo else '0' }}
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
+
+[remi-php71-test]
+name=Remi's PHP 7.1 test RPM repository for Enterprise Linux {{ remi_rel }} - $basearch
+#baseurl=http://rpms.remirepo.net/enterprise/{{ remi_rel }}/test71/$basearch/
+#mirrorlist=https://rpms.remirepo.net/enterprise/{{ remi_rel }}/test71/httpsmirror
+mirrorlist=http://rpms.remirepo.net/enterprise/{{ remi_rel }}/test71/mirror
+enabled={{ '1' if remi_remi_php71_test is defined and remi_remi_php71_test else '0' }}
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
+
+[remi-php71-test-debuginfo]
+name=Remi's PHP 7.1 test RPM repository for Enterprise Linux {{ remi_rel }} - $basearch - debuginfo
+baseurl=http://rpms.remirepo.net/enterprise/{{ remi_rel }}/debug-test71/$basearch/
+enabled={{ '1' if remi_remi_php71_test_debuginfo is defined and remi_remi_php71_test_debuginfo else '0' }}
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
