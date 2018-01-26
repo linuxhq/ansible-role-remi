@@ -5,7 +5,7 @@
 name=Remi's PHP 7.1 RPM repository for Enterprise Linux {{ remi_rel }} - $basearch
 #baseurl=http://rpms.remirepo.net/enterprise/{{ remi_rel }}/php71/$basearch/
 #mirrorlist=https://rpms.remirepo.net/enterprise/{{ remi_rel }}/php71/httpsmirror
-mirrorlist=http://rpms.remirepo.net/enterprise/{{ remi_rel }}/php71/mirror
+mirrorlist=http://cdn.remirepo.net/enterprise/{{ remi_rel }}/php71/mirror
 enabled={{ '1' if remi_remi_php71 is defined and remi_remi_php71 else '0' }}
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
@@ -21,7 +21,7 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
 name=Remi's PHP 7.1 test RPM repository for Enterprise Linux {{ remi_rel }} - $basearch
 #baseurl=http://rpms.remirepo.net/enterprise/{{ remi_rel }}/test71/$basearch/
 #mirrorlist=https://rpms.remirepo.net/enterprise/{{ remi_rel }}/test71/httpsmirror
-mirrorlist=http://rpms.remirepo.net/enterprise/{{ remi_rel }}/test71/mirror
+mirrorlist=http://cdn.remirepo.net/enterprise/{{ remi_rel }}/test71/mirror
 enabled={{ '1' if remi_remi_php71_test is defined and remi_remi_php71_test else '0' }}
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
