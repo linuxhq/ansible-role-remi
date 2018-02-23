@@ -57,6 +57,7 @@
   with_items:
     - /etc/pki/rpm-gpg/RPM-GPG-KEY-remi
     - /etc/pki/rpm-gpg/RPM-GPG-KEY-remi2017
+    - /etc/pki/rpm-gpg/RPM-GPG-KEY-remi2018
 
 - name: Purging temporary package from filesystem
   tags: remi

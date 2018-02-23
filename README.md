@@ -14,28 +14,28 @@ Available variables are listed below, along with default values:
 
     remi_pkg: remi-release
     remi_rel: "{{ ansible_distribution_major_version }}"
-    remi_baseurl: "http://rpms.famillecollet.com/enterprise"
+    remi_baseurl: "https://rpms.remirepo.net/enterprise"
     remi_release: "{{ remi_pkg }}-{{ remi_rel }}"
     remi_fetch: "{{ remi_baseurl }}/{{ remi_release }}.rpm"
-    remi_remi: False
-    remi_remi_debuginfo: False
-    remi_remi_safe: True
-    remi_remi_safe_debuginfo: False
-    remi_remi_test: False
-    remi_remi_test_debuginfo: False
-    remi_remi_php54: False
-    remi_remi_php70: False
-    remi_remi_php70_debuginfo: False
-    remi_remi_php70_test: False
-    remi_remi_php70_test_debuginfo: False
-    remi_remi_php71: False
-    remi_remi_php71_debuginfo: False
-    remi_remi_php71_test: False
-    remi_remi_php71_test_debuginfo: False
-    remi_remi_php72: False
-    remi_remi_php72_debuginfo: False
-    remi_remi_php72_test: False
-    remi_remi_php72_test_debuginfo: False
+    remi_remi: false
+    remi_remi_debuginfo: false
+    remi_remi_safe: true
+    remi_remi_safe_debuginfo: false
+    remi_remi_test: false
+    remi_remi_test_debuginfo: false
+    remi_remi_php54: false
+    remi_remi_php70: false
+    remi_remi_php70_debuginfo: false
+    remi_remi_php70_test: false
+    remi_remi_php70_test_debuginfo: false
+    remi_remi_php71: false
+    remi_remi_php71_debuginfo: false
+    remi_remi_php71_test: false
+    remi_remi_php71_test_debuginfo: false
+    remi_remi_php72: false
+    remi_remi_php72_debuginfo: false
+    remi_remi_php72_test: false
+    remi_remi_php72_test_debuginfo: false
 
 ## Dependencies
 
@@ -46,7 +46,7 @@ Available variables are listed below, along with default values:
     - hosts: servers
       roles:
         - role: linuxhq.remi
-          remi_remi: True
+          remi_remi: true
 
 ## License
 
