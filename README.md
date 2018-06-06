@@ -65,10 +65,10 @@ None
             - post-transaction-actions
           remi_enablerepo:
             - epel
-          remi_repository_remi_php72: true
           remi_packages:
             - php
             - php-cli
+          remi_repository_remi_php72: true
 
 ## License
 
