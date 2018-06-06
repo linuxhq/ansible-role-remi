@@ -1,26 +1,31 @@
 ---
+remi_baseurl: "https://rpms.remirepo.net/enterprise"
+remi_disable_plugin: []
+remi_disablerepo: []
+remi_enable_plugin: []
+remi_enablerepo: []
+remi_fetch: "{{ remi_baseurl }}/{{ remi_release }}.rpm"
+remi_packages: []
 remi_pkg: remi-release
 remi_rel: "{{ ansible_distribution_major_version }}"
-remi_baseurl: "https://rpms.remirepo.net/enterprise"
-remi_release: "{{ remi_pkg }}-{{ remi_rel }}" 
-remi_fetch: "{{ remi_baseurl }}/{{ remi_release }}.rpm"
-remi_remi: false
-remi_remi_debuginfo: false
-remi_remi_safe: true
-remi_remi_safe_debuginfo: false
-remi_remi_test: false
-remi_remi_test_debuginfo: false
-remi_remi_php54: false
-remi_remi_php70: false
-remi_remi_php70_debuginfo: false
-remi_remi_php70_test: false
-remi_remi_php70_test_debuginfo: false
-remi_remi_php71: false
-remi_remi_php71_debuginfo: false
-remi_remi_php71_test: false
-remi_remi_php71_test_debuginfo: false
-remi_remi_php72: false
-remi_remi_php72_debuginfo: false
-remi_remi_php72_test: false
-remi_remi_php72_test_debuginfo: false
+remi_release: "{{ remi_pkg }}-{{ remi_rel }}"
+remi_repository_remi: false
+remi_repository_remi_debuginfo: false
+remi_repository_remi_safe: true
+remi_repository_remi_safe_debuginfo: false
+remi_repository_remi_test: false
+remi_repository_remi_test_debuginfo: false
+remi_repository_remi_php54: false
+remi_repository_remi_php70: false
+remi_repository_remi_php70_debuginfo: false
+remi_repository_remi_php70_test: false
+remi_repository_remi_php70_test_debuginfo: false
+remi_repository_remi_php71: false
+remi_repository_remi_php71_debuginfo: false
+remi_repository_remi_php71_test: false
+remi_repository_remi_php71_test_debuginfo: false
+remi_repository_remi_php72: false
+remi_repository_remi_php72_debuginfo: false
+remi_repository_remi_php72_test: false
+remi_repository_remi_php72_test_debuginfo: false
 ...

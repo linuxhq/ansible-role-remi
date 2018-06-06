@@ -6,14 +6,14 @@ name=Remi's PHP 7.0 RPM repository for Enterprise Linux {{ remi_rel }} - $basear
 #baseurl=http://rpms.remirepo.net/enterprise/{{ remi_rel }}/php70/$basearch/
 #mirrorlist=https://rpms.remirepo.net/enterprise/{{ remi_rel }}/php70/httpsmirror
 mirrorlist=http://cdn.remirepo.net/enterprise/{{ remi_rel }}/php70/mirror
-enabled={{ '1' if remi_remi_php70 is defined and remi_remi_php70 else '0' }}
+enabled={{ '1' if remi_repository_remi_php70|bool else '0' }}
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
 
 [remi-php70-debuginfo]
 name=Remi's PHP 7.0 RPM repository for Enterprise Linux {{ remi_rel }} - $basearch - debuginfo
 baseurl=http://rpms.remirepo.net/enterprise/{{ remi_rel }}/debug-php70/$basearch/
-enabled={{ '1' if remi_remi_php70_debuginfo is defined and remi_remi_php70_debuginfo else '0' }}
+enabled={{ '1' if remi_repository_remi_php70_debuginfo|bool else '0' }}
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
 
@@ -22,13 +22,13 @@ name=Remi's PHP 7.0 test RPM repository for Enterprise Linux {{ remi_rel }} - $b
 #baseurl=http://rpms.remirepo.net/enterprise/{{ remi_rel }}/test70/$basearch/
 #mirrorlist=https://rpms.remirepo.net/enterprise/{{ remi_rel }}/test70/httpsmirror
 mirrorlist=http://cdn.remirepo.net/enterprise/{{ remi_rel }}/test70/mirror
-enabled={{ '1' if remi_remi_php70_test is defined and remi_remi_php70_test else '0' }}
+enabled={{ '1' if remi_repository_remi_php70_test|bool else '0' }}
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
 
 [remi-php70-test-debuginfo]
 name=Remi's PHP 7.0 test RPM repository for Enterprise Linux {{ remi_rel }} - $basearch - debuginfo
 baseurl=http://rpms.remirepo.net/enterprise/{{ remi_rel }}/debug-test70/$basearch/
-enabled={{ '1' if remi_remi_php70_test_debuginfo is defined and remi_remi_php70_test_debuginfo else '0' }}
+enabled={{ '1' if remi_repository_remi_php70_test_debuginfo|bool else '0' }}
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi

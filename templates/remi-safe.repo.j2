@@ -7,13 +7,13 @@ name=Safe Remi's RPM repository for Enterprise Linux {{ remi_rel }} - $basearch
 #baseurl=http://rpms.remirepo.net/enterprise/{{ remi_rel }}/safe/$basearch/
 #mirrorlist=https://rpms.remirepo.net/enterprise/{{ remi_rel }}/safe/httpsmirror
 mirrorlist=http://cdn.remirepo.net/enterprise/{{ remi_rel }}/safe/mirror
-enabled={{ '1' if remi_remi_safe is defined and remi_remi_safe else '0' }}
+enabled={{ '1' if remi_repository_remi_safe|bool else '0' }}
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
 
 [remi-safe-debuginfo]
 name=Remi's RPM repository for Enterprise Linux {{ remi_rel }} - $basearch - debuginfo
 baseurl=http://rpms.remirepo.net/enterprise/{{ remi_rel }}/debug-remi/$basearch/
-enabled={{ '1' if remi_remi_safe_debuginfo is defined and remi_remi_safe_debuginfo else '0' }}
+enabled={{ '1' if remi_repository_remi_safe_debuginfo|bool else '0' }}
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi

@@ -7,30 +7,47 @@
       - remi_rel is defined
       - remi_baseurl is defined
 
-- name: Generating temporary filename via mktemp
+- name: Attempting to generate temporary file
   tags: remi
-  command: mktemp -u --suffix .rpm
-  register: remi_mktemp
+  tempfile:
+    prefix: 'remi.'
+    state: file
+    suffix: '.rpm'
+  register: remi_tempfile
 
-- name: Downloading package to temporary location
+- name: Attempting to download package to temporary location
   tags: remi
   get_url:
+    dest: "{{ remi_tempfile.path }}"
+    force: yes
     url: "{{ remi_fetch }}"
-    dest: "{{ remi_mktemp.stdout }}"
   register: remi_get_url
-  when: remi_mktemp|success
+  when: remi_tempfile is success
 
-- name: Ensure that the remi-release package is installed
+- name: Ensure that the {{ remi_pkg }} package is installed
   tags: remi
   become: true
   yum:
+    disable_plugin: "{{ remi_disable_plugin|join(',') }}"
+    disablerepo: "{{ remi_disablerepo|join(',') }}"
+    enable_plugin: "{{ remi_enable_plugin|join(',') }}"
+    enablerepo: "{{ remi_enablerepo|join(',') }}"
     name: "{{ item }}"
     state: present
   register: remi_yum
-  with_items: "{{ remi_mktemp.stdout }}"
-  when: remi_get_url|success
+  with_items: "{{ remi_tempfile.path }}"
+  when: remi_get_url is success
 
-- name: Applying remi repository configurations
+- name: Attempting to purge temporary package from the filesystem
+  tags: remi
+  file:
+    path: "{{ remi_tempfile.path }}"
+    state: absent
+  when:
+    - remi_tempfile is success
+    - remi_yum is success
+
+- name: Attempting to overlay remi repository configurations
   tags: remi
   become: true
   template:
@@ -46,9 +63,9 @@
     - { src: remi-php71.repo.j2, dst: /etc/yum.repos.d/remi-php71.repo }
     - { src: remi-php72.repo.j2, dst: /etc/yum.repos.d/remi-php72.repo }
     - { src: remi-safe.repo.j2, dst: /etc/yum.repos.d/remi-safe.repo }
-  when: remi_yum|success
+  when: remi_yum is success
 
-- name: Ensure that the Remi GPG keys are installed
+- name: Ensure that the remi gpg are installed
   tags: remi
   become: true
   rpm_key:
@@ -58,13 +75,20 @@
     - /etc/pki/rpm-gpg/RPM-GPG-KEY-remi
     - /etc/pki/rpm-gpg/RPM-GPG-KEY-remi2017
     - /etc/pki/rpm-gpg/RPM-GPG-KEY-remi2018
+  when: remi_yum is success
 
-- name: Purging temporary package from filesystem
+- name: Ensure that the required remi packages are installed
   tags: remi
-  file:
-    path: "{{ remi_mktemp.stdout }}"
-    state: absent
+  become: true
+  yum:
+    disable_plugin: "{{ remi_disable_plugin|join(',') }}"
+    disablerepo: "{{ remi_disablerepo|join(',') }}"
+    enable_plugin: "{{ remi_enable_plugin|join(',') }}"
+    enablerepo: "{{ remi_enablerepo|join(',') }}"
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ remi_packages }}"
   when:
-    - remi_mktemp|success
-    - remi_yum|success
+    - remi_packages|length > 0
+    - remi_yum is success
 ...

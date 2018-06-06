@@ -7,7 +7,7 @@ name=Remi's RPM repository for Enterprise Linux {{ remi_rel }} - $basearch
 #baseurl=http://rpms.remirepo.net/enterprise/{{ remi_rel }}/remi/$basearch/
 #mirrorlist=https://rpms.remirepo.net/enterprise/{{ remi_rel }}/remi/httpsmirror
 mirrorlist=http://cdn.remirepo.net/enterprise/{{ remi_rel }}/remi/mirror
-enabled={{ '1' if remi_remi is defined and remi_remi else '0' }}
+enabled={{ '1' if remi_repository_remi|bool else '0' }}
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
 
@@ -17,7 +17,7 @@ name=Remi's PHP 5.5 RPM repository for Enterprise Linux {{ remi_rel }} - $basear
 #mirrorlist=https://rpms.remirepo.net/enterprise/{{ remi_rel }}/php55/httpsmirror
 mirrorlist=http://cdn.remirepo.net/enterprise/{{ remi_rel }}/php55/mirror
 # NOTICE: common dependencies are in "remi-safe"
-enabled={{ '1' if remi_remi_php55 is defined and remi_remi_php55 else '0' }}
+enabled={{ '1' if remi_repository_remi_php55|bool else '0' }}
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
 
@@ -27,7 +27,7 @@ name=Remi's PHP 5.6 RPM repository for Enterprise Linux {{ remi_rel }} - $basear
 #mirrorlist=https://rpms.remirepo.net/enterprise/{{ remi_rel }}/php56/httpsmirror
 mirrorlist=http://cdn.remirepo.net/enterprise/{{ remi_rel }}/php56/mirror
 # NOTICE: common dependencies are in "remi-safe"
-enabled={{ '1' if remi_remi_php56 is defined and remi_remi_php56 else '0' }}
+enabled={{ '1' if remi_repository_remi_php56|bool else '0' }}
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
 
@@ -37,35 +37,35 @@ name=Remi's test RPM repository for Enterprise Linux {{ remi_rel }} - $basearch
 #mirrorlist=https://rpms.remirepo.net/enterprise/{{ remi_rel }}/test/mirror
 mirrorlist=http://cdn.remirepo.net/enterprise/{{ remi_rel }}/test/mirror
 # WARNING: If you enable this repository, you must also enable "remi"
-enabled={{ '1' if remi_remi_test is defined and remi_remi_test else '0' }}
+enabled={{ '1' if remi_repository_remi_test|bool else '0' }}
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
 
 [remi-debuginfo]
 name=Remi's RPM repository for Enterprise Linux {{ remi_rel }} - $basearch - debuginfo
 baseurl=http://rpms.remirepo.net/enterprise/{{ remi_rel }}/debug-remi/$basearch/
-enabled={{ '1' if remi_remi_debuginfo is defined and remi_remi_debuginfo else '0' }}
+enabled={{ '1' if remi_repository_remi_debuginfo|bool else '0' }}
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
 
 [remi-php55-debuginfo]
 name=Remi's PHP 5.5 RPM repository for Enterprise Linux {{ remi_rel }} - $basearch - debuginfo
 baseurl=http://rpms.remirepo.net/enterprise/{{ remi_rel }}/debug-php55/$basearch/
-enabled={{ '1' if remi_remi_php55_debuginfo is defined and remi_remi_php55_debuginfo else '0' }}
+enabled={{ '1' if remi_repository_remi_php55_debuginfo|bool else '0' }}
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
 
 [remi-php56-debuginfo]
 name=Remi's PHP 5.6 RPM repository for Enterprise Linux {{ remi_rel }} - $basearch - debuginfo
 baseurl=http://rpms.remirepo.net/enterprise/{{ remi_rel }}/debug-php56/$basearch/
-enabled={{ '1' if remi_remi_php56_debuginfo is defined and remi_remi_php56_debuginfo else '0' }}
+enabled={{ '1' if remi_repository_remi_php56_debuginfo|bool else '0' }}
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
 
 [remi-test-debuginfo]
 name=Remi's test RPM repository for Enterprise Linux {{ remi_rel }} - $basearch - debuginfo
 baseurl=http://rpms.remirepo.net/enterprise/{{ remi_rel }}/debug-test/$basearch/
-enabled={{ '1' if remi_remi_test_debuginfo is defined and remi_remi_test_debuginfo else '0' }}
+enabled={{ '1' if remi_repository_remi_test_debuginfo|bool else '0' }}
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
 
