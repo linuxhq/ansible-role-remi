@@ -28,10 +28,6 @@ Available variables are listed below, along with default values:
     remi_release: "{{ remi_pkg }}-{{ remi_rel }}"
     remi_repository_remi: false
     remi_repository_remi_debuginfo: false
-    remi_repository_remi_safe: true
-    remi_repository_remi_safe_debuginfo: false
-    remi_repository_remi_test: false
-    remi_repository_remi_test_debuginfo: false
     remi_repository_remi_php54: false
     remi_repository_remi_php55: false
     remi_repository_remi_php55_debuginfo: false
@@ -49,6 +45,12 @@ Available variables are listed below, along with default values:
     remi_repository_remi_php72_debuginfo: false
     remi_repository_remi_php72_test: false
     remi_repository_remi_php72_test_debuginfo: false
+    remi_repository_remi_safe: false
+    remi_repository_remi_safe_debuginfo: false
+    remi_repository_remi_test: false
+    remi_repository_remi_test_debuginfo: false
+
+All repositories are disabled by default.
 
 ## Dependencies
 
