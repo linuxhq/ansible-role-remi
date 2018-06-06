@@ -33,6 +33,8 @@ Available variables are listed below, along with default values:
     remi_repository_remi_test: false
     remi_repository_remi_test_debuginfo: false
     remi_repository_remi_php54: false
+    remi_repository_remi_php55: false
+    remi_repository_remi_php55_debuginfo: false
     remi_repository_remi_php70: false
     remi_repository_remi_php70_debuginfo: false
     remi_repository_remi_php70_test: false
