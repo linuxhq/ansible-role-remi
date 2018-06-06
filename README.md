@@ -61,7 +61,14 @@ None
     - hosts: servers
       roles:
         - role: linuxhq.remi
-          remi_repository_remi: true
+          remi_disable_plugin:
+            - post-transaction-actions
+          remi_enablerepo:
+            - epel
+          remi_repository_remi_php72: true
+          remi_packages:
+            - php
+            - php-cli
 
 ## License
 
