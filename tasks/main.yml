@@ -1,12 +1,4 @@
 ---
-- name: Assert that the prerequisites are defined
-  tags: remi
-  assert:
-    that:
-      - remi_pkg is defined
-      - remi_rel is defined
-      - remi_baseurl is defined
-
 - name: Attempting to generate temporary file
   tags: remi
   tempfile:
@@ -58,6 +50,9 @@
     mode: 0644
   with_items:
     - { src: remi.repo.j2, dst: /etc/yum.repos.d/remi.repo }
+    - { src: remi-glpi91.repo.j2, dst: /etc/yum.repos.d/remi-glpi91.repo }
+    - { src: remi-glpi92.repo.j2, dst: /etc/yum.repos.d/remi-glpi92.repo }
+    - { src: remi-glpi93.repo.j2, dst: /etc/yum.repos.d/remi-glpi93.repo }
     - { src: remi-php54.repo.j2, dst: /etc/yum.repos.d/remi-php54.repo }
     - { src: remi-php70.repo.j2, dst: /etc/yum.repos.d/remi-php70.repo }
     - { src: remi-php71.repo.j2, dst: /etc/yum.repos.d/remi-php71.repo }
@@ -65,7 +60,7 @@
     - { src: remi-safe.repo.j2, dst: /etc/yum.repos.d/remi-safe.repo }
   when: remi_yum is success
 
-- name: Ensure that the remi gpg are installed
+- name: Ensure that the remi gpg keys are installed
   tags: remi
   become: true
   rpm_key:
