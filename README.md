@@ -28,6 +28,9 @@ Available variables are listed below, along with default values:
     remi_release: "{{ remi_pkg }}-{{ remi_rel }}"
     remi_repository_remi: false
     remi_repository_remi_debuginfo: false
+    remi_repository_remi_glpi91: false
+    remi_repository_remi_glpi92: false
+    remi_repository_remi_glpi93: false
     remi_repository_remi_php54: false
     remi_repository_remi_php55: false
     remi_repository_remi_php55_debuginfo: false
