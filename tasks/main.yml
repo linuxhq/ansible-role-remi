@@ -24,10 +24,9 @@
     disablerepo: "{{ remi_disablerepo|join(',') }}"
     enable_plugin: "{{ remi_enable_plugin|join(',') }}"
     enablerepo: "{{ remi_enablerepo|join(',') }}"
-    name: "{{ item }}"
+    name: "{{ remi_tempfile.path }}"
     state: present
   register: remi_yum
-  with_items: "{{ remi_tempfile.path }}"
   when: remi_get_url is success
 
 - name: Attempting to purge temporary package from the filesystem
@@ -48,7 +47,7 @@
     owner: root
     group: root
     mode: 0644
-  with_items:
+  loop:
     - { src: remi.repo.j2, dst: /etc/yum.repos.d/remi.repo }
     - { src: remi-glpi91.repo.j2, dst: /etc/yum.repos.d/remi-glpi91.repo }
     - { src: remi-glpi92.repo.j2, dst: /etc/yum.repos.d/remi-glpi92.repo }
@@ -58,6 +57,8 @@
     - { src: remi-php71.repo.j2, dst: /etc/yum.repos.d/remi-php71.repo }
     - { src: remi-php72.repo.j2, dst: /etc/yum.repos.d/remi-php72.repo }
     - { src: remi-safe.repo.j2, dst: /etc/yum.repos.d/remi-safe.repo }
+  loop_control:
+    label: "{{ item.src.split('.')[0] }}"
   when: remi_yum is success
 
 - name: Ensure that the remi gpg keys are installed
@@ -66,10 +67,12 @@
   rpm_key:
     key: "{{ item }}"
     state: present
-  with_items:
+  loop:
     - /etc/pki/rpm-gpg/RPM-GPG-KEY-remi
     - /etc/pki/rpm-gpg/RPM-GPG-KEY-remi2017
     - /etc/pki/rpm-gpg/RPM-GPG-KEY-remi2018
+  loop_control:
+    label: "{{ item.split('/')[4] }}"
   when: remi_yum is success
 
 - name: Ensure that the required remi packages are installed
@@ -82,7 +85,7 @@
     enablerepo: "{{ remi_enablerepo|join(',') }}"
     name: "{{ item }}"
     state: present
-  with_items: "{{ remi_packages }}"
+  loop: "{{ remi_packages }}"
   when:
     - remi_packages|length > 0
     - remi_yum is success
